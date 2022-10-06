@@ -2,5 +2,5 @@
 int main()
 {
     printf("urmom\n");
-    return 1;
+    return 0;
 }
