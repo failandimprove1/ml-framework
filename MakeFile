@@ -7,4 +7,6 @@ SRCS=$(wildcard $(SRC)/*.c)
 all:$(BIN)
 
 main:
+
 	$(CC) $(CFLAGS) -o main $(SRCS)
+
