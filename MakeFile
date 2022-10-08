@@ -1,2 +1,2 @@
 main:
-	gcc src/main.c -o bin/main
+	gcc src/main.c src/tools.c -o bin/main
