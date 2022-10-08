@@ -1,2 +1,10 @@
+CC=gcc
+CFLAGS=-Wall -Wextra -pedantic
+BIN=main
+SRC=src
+SRCS=$(wildcard $(SRC)/*.c)
+
+all:$(BIN)
+
 main:
-	gcc src/main.c -o bin/main
+	$(CC) $(CFLAGS) -o main $(SRCS)
