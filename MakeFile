@@ -8,5 +8,5 @@ all:$(BIN)
 
 main:
 
-	$(CC) $(CFLAGS) -o main $(SRCS)
+	$(CC) $(CFLAGS) -o bin/main $(SRCS)
 
