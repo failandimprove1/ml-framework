@@ -14,7 +14,7 @@ void write_to_file(char* path, char *content)
 {
     FILE* fptr = fopen(path, "w+");
     format_content_for_file(content);
-    fprintf(fptr, content);
+    fprintf(fptr, "%s", content);
     fclose(fptr);
 }
 

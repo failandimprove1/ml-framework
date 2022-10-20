@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "tools.h"
+#include "src/tools.h"
 
 
 int main()
