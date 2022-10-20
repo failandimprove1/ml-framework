@@ -5,6 +5,7 @@ TEST=tests
 SRCS=$(wildcard $(SRC)/*.c)
 TESTS=$(wildcard $(TEST)/*.c)
 
+
 all: main
 
 main:
