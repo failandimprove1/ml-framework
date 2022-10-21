@@ -1,5 +1,6 @@
-#define MAX 50
-#include <stdio.h>
-void write_to_file(char* path, char *content);
-void format_content_for_file(char *content);
-FILE* read_file(char* path);
+#include <iostream>
+#include <fstream>
+using namespace std;
+fstream create_file(string filename);
+
+void read_file(string filename);
