@@ -1,1 +1,1 @@
-# Machine Learning Framework in C++
+# Machine Learning Framework in C/C++
