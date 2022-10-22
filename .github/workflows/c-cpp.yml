@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: test pipeline CI
 
 on:
   push:
@@ -9,27 +9,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+    steps:  
     - name: make unit-tests
       run: make unit-test
-      
+
     - name: Upload a Build Artifact
-    - uses: actions/upload-artifact@v3.1.1
+      uses: actions/upload-artifact@v3.1.1
       with: 
         name: test_artifact
 
   runTest:
     runs-on: ubuntu-latest
-    steps:
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: test_artifact
-      - name: Running test
-        run: |
-          chmod +x test_artifact
-          test_artifact
+    steps:  
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.1
+      with:
+        name: test_artifact
+    - name: Running test
+      run: |
+        chmod +x test_artifact
+        test_artifact
 
 
   
