@@ -11,7 +11,7 @@ fstream create_file(string filename)
     else
         FileObj.close();
     return FileObj;
-}   
+}
 
 void read_file(string filename)
 {
@@ -23,6 +23,6 @@ void read_file(string filename)
     }
     while (getline(filestream, filestreambuffer))
         cout << filestreambuffer << endl;
-    
+
     filestream.close();
 }
