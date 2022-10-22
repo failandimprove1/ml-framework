@@ -8,8 +8,15 @@ TESTS=$(wildcard $(TEST)/*.cpp)
 
 all: main
 
-main:
+make_dir:
+	mkdir $(BIN)
+
+main: make_dir
 	$(CC) main.cpp -o $(BIN)/main $(SRCS)
 
-unit-test:
+unit-test: make_dir
 	$(CC) -o $(BIN)/tests $(TESTS) $(SRCS)
+
+clean:
+	rm $(BIN)/*
+
