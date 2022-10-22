@@ -1,8 +1,13 @@
-void assert(bool isEqual);
-extern char * FUNCTION_NAME;
-typedef struct test_stats test_stats_t;
-struct test_stats {
-	int passed;
-	int failed;
+#pragma once
+#include <iostream>
+#include "result.h"
+class Test {
+	public:
+		Test();
+		~Test() {};
+		Result * results;
+		void is_equal(bool condition, std::string error_msg);
+		std::string format_synapsis(int runs, int fails, int successes);
+		int conclude();
+
 };
-extern test_stats_t test_stats;
