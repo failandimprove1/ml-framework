@@ -15,6 +15,6 @@ void test_create_file()
 int main()
 {
 	test_create_file();
-	if (test.conclude()) throw exception();
+	exit(test.conclude());
 };
 
