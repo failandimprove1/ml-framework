@@ -24,7 +24,7 @@ jobs:
     - name: Running test
       run: |
         chmod +x bin/tests
-        bin/test
+        bin/tests
 
 
   
