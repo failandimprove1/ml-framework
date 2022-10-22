@@ -32,7 +32,7 @@ int Test::conclude(){
 	std::string synapsis_message = this->format_synapsis(runs, fails, successes);
 	std::cout << synapsis_message << std::endl;
 
-	if (fails) return_code = 1;
+	if (fails) return_code = -1;
 	return return_code;
 };
 

@@ -2,7 +2,7 @@
 #include "result.h"
 #include "testtools.h"
 #include "../src/tools.h"
-
+#include <cassert>
 Test test = Test();
 
 void test_create_file()
@@ -15,7 +15,6 @@ void test_create_file()
 int main()
 {
 	test_create_file();
-	test.conclude();
-	return 0;
+	if (test.conclude()) throw exception();
 };
 
