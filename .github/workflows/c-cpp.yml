@@ -19,7 +19,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.1
       with: 
         name: test_artifact
-        path: bin/
+        path: bin/tests
         
     - name: Download a Build Artifact
       uses: actions/download-artifact@v3.0.1
@@ -28,7 +28,7 @@ jobs:
     - name: Running test
       run: |
         chmod +x test_artifact
-        bin/test_artifact
+        test_artifact
 
 
   
