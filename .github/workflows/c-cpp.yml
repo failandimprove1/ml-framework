@@ -25,7 +25,4 @@ jobs:
       run: |
         chmod +x bin/tests
         bin/tests
-
-
-  
-  
+      shell: bash
