@@ -21,14 +21,10 @@ jobs:
         name: test_artifact
         path: bin/tests
         
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v3.0.1
-      with:
-        name: test_artifact
     - name: Running test
       run: |
-        chmod +x test_artifact
-        test_artifact
+        chmod +x bin/tests
+        bin/test
 
 
   
