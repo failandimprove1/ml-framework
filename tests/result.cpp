@@ -1,4 +1,4 @@
-#include "result.h"
+#include "result.hpp"
 void Result::add_success()
 {
 	this->success += 1;
