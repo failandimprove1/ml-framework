@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "result.h"
+#include "result.hpp"
 class Test {
 	public:
 		Test();

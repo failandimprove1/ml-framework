@@ -1,4 +1,4 @@
-#include "testtools.h"
+#include "testtools.hpp"
 
 Test::Test() {
 	this->results = new Result();
@@ -23,7 +23,8 @@ std::string Test::format_synapsis(int runs, int fails, int successes)
 		", successful runs " + std::to_string(successes) + "\033[m";
 };
 
-void Test::conclude(){
+void Test::conclude()
+{
 	int return_code = 0;
 	int runs = this->results->get_all_runs();
 	int fails = this->results->get_fails();
