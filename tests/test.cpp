@@ -15,6 +15,7 @@ void test_create_file()
 int main()
 {
 	test_create_file();
-	exit(test.conclude());
+
+	test.conclude();
 };
 

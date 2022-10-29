@@ -23,7 +23,7 @@ std::string Test::format_synapsis(int runs, int fails, int successes)
 		", successful runs " + std::to_string(successes) + "\033[m";
 };
 
-int Test::conclude(){
+void Test::conclude(){
 	int return_code = 0;
 	int runs = this->results->get_all_runs();
 	int fails = this->results->get_fails();
@@ -32,7 +32,7 @@ int Test::conclude(){
 	std::string synapsis_message = this->format_synapsis(runs, fails, successes);
 	std::cout << synapsis_message << std::endl;
 
-	if (fails) return_code = -1;
-	return return_code;
+	if (fails) return_code = 1;
+	exit(return_code);
 };
 
