@@ -32,6 +32,7 @@ void test_vector_elementwise_multiplication()
 int main()
 {
 	test_create_file();
-	exit(test.conclude());
+
+	test.conclude();
 };
 

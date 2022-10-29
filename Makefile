@@ -8,13 +8,23 @@ SRCS_NOT_MAIN=$(filter-out $(SRC)/main.cpp, $(wildcard $(SRC)/*.cpp))
 
 all: main
 
-make_dir:
+
+make-dir:
 	if not exist $(BIN) mkdir $(BIN)
 
-main: make_dir
+make-dir-linux:
+	mkdir -p $(BIN)
+
+main-linux: make-dir-linux
 	$(CC) -o $(BIN)/main $(SRCS)
 
-unit-test: make_dir
+main: make-dir
+	$(CC) -o $(BIN)/main $(SRCS)
+
+unit-test: make-dir
+	$(CC) -o $(BIN)/tests $(TESTS) $(SRCS_NOT_MAIN)
+
+linux-unit-test: make-dir-linux
 	$(CC) -o $(BIN)/tests $(TESTS) $(SRCS_NOT_MAIN)
 
 clean:
