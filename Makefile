@@ -28,5 +28,5 @@ linux-unit-test: make-dir-linux
 	$(CC) -o $(BIN)/tests $(TESTS) $(SRCS_NOT_MAIN)
 
 clean:
-	rm $(BIN)/*
+	rm -r $(BIN)
 
