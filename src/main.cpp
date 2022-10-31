@@ -1,4 +1,4 @@
-#include "tools.h"
+#include "tools.hpp"
 #include <vector>
 
 std::vector<float> vector_element_multiplication(std::vector<float> vector1, std::vector<float> vector2)
