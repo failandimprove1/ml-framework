@@ -50,30 +50,42 @@ float dot_product(vector_t vector1, vector_t vector2)
 }
 
 
-//transpose result matrix
+matrix_t transpose_matrix(matrix_t &matrix)
+{
+	matrix_t transposed_matrix;
+	vector_t transposed_vector;
+
+	for (int x = 0; x < matrix.size(); x++)
+	{
+		for (int y = 0; y < matrix[x].size(); y ++)
+		{
+			float val = matrix[y][x];
+			transposed_vector.push_back(val);
+		}
+
+		transposed_matrix.push_back(transposed_vector);
+		transposed_vector.clear();
+	}
+	matrix = transposed_matrix;
+	return transposed_matrix;
+}
+
 matrix_t dot_product(matrix_t matrix1, matrix_t matrix2)
 {
 	vector_t result_vec, transposed_vector;
 	matrix_t return_matrix;
+	transpose_matrix(matrix2);
 
 	for (int i = 0; i < matrix1.size(); i++)
 	{
-
-		for (int y = 0; y < matrix2[i].size(); y++)
-		{
-			float val = matrix2[y][i];
-			transposed_vector.push_back(val);
-		}
-
 		for (int j = 0; j < matrix1[i].size(); j++)
-			result_vec.push_back(dot_product(matrix1[j], transposed_vector));
+			result_vec.push_back(dot_product(matrix1[j], matrix2[i]));
 
 		return_matrix.push_back(result_vec);
 		result_vec.clear();
 		transposed_vector.clear();
 	}
-	//transpose_matrix(return_matrix);
-	return return_matrix;
+	return transpose_matrix(return_matrix);
 }
 
 float median(vector_t vector)
