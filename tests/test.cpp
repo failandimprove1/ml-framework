@@ -2,6 +2,7 @@
 #include "result.hpp"
 #include "testtools.hpp"
 #include "../src/tools.hpp"
+#include "../src/types.hpp"
 #include "../src/math.hpp"
 #include <cassert>
 Test test = Test();
@@ -15,7 +16,8 @@ void test_create_file()
 
 void test_vector_elementwise_multiplication()
 {
-	std::vector<float> test_field1, test_field2, test_field_result, expected_field_results;
+	vector_t test_field1, test_field2, test_field_result, expected_field_results;
+
 	test_field1.push_back(1.5f);
 	test_field1.push_back(2.f);
 	test_field1.push_back(3.f);
@@ -45,7 +47,7 @@ void test_vector_elementwise_multiplication()
 
 void test_vector_dot_product()
 {
-	std::vector<float> test_field1, test_field2;
+	vector_t test_field1, test_field2;
 	float test_result, expected_test_result;
 
 	test_field1.push_back(1.5f);
