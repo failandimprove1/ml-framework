@@ -15,13 +15,13 @@ make-dir:
 make-dir-linux:
 	mkdir -p $(BIN)
 
+main: make-dir
+	$(CC) -o $(BIN)/main $(SRCS)
+	
 main-linux: make-dir-linux
 	$(CC) -o $(BIN)/main $(SRCS)
 
-main: make-dir
-	$(CC) -o $(BIN)/main $(SRCS)
-
-unit-test: make-dir
+test: make-dir
 	$(CC) -o $(BIN)/tests $(TESTS) $(SRCS_NOT_MAIN)
 
 linux-unit-test: make-dir-linux
