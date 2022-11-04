@@ -5,6 +5,7 @@
 #include "../src/types.hpp"
 #include "../src/math.hpp"
 #include <cassert>
+
 Test test = Test();
 
 void test_create_file()
@@ -92,7 +93,6 @@ void test_median()
 	test_field.push_back(1.f);
 	test_field.push_back(100.f);
 	test_field.push_back(-50.f);
-	
 	test_median = median(test_field);
 	expected_test_median = 30.5f;
 
@@ -133,14 +133,62 @@ void test_mean()
 	test.is_equal(test_mean == expected_test_mean, "expected mean function to produce " + to_string(expected_test_mean)+ ", got" + to_string(test_mean));
 }
 
+void test_transpose_matrix()
+{
+	matrix_t transposed_matrix;
+	matrix_t to_be_transposed_matrix;
+
+	to_be_transposed_matrix = {{4.f, 2.f}, {3.f,2.f}};
+	transposed_matrix = {{4.f, 3.f}, {2.f,2.f}};
+
+	test.is_equal(to_be_transposed_matrix != transposed_matrix, "expecting matrices to NOT be equal when NOT transposed");
+	transpose_matrix(transposed_matrix);
+
+	test.is_equal(to_be_transposed_matrix == transposed_matrix, "expecting matrices to be the equal when transposed");
+}
+
+void test_matrix_dot_product()
+{
+	matrix_t test_matrix, another_test_matrix, result_matrix;
+	matrix_t expected_matrix;
+
+	test_matrix = {
+		{1.f, 2.f, 3.f,},
+		{4.f, 5.f, 6.f,},
+		{7.f, 8.f, 9.f},
+	};
+	another_test_matrix = {
+		{2.f, 8.f, 0.3f,},
+		{2.f, 3.f, 3.f,},
+		{2.f, 3.f, 3.f},
+	};
+	expected_matrix = {
+		{12.f, 23.f, 15.3f,},
+		{30.f, 65.f, 34.2f,},
+		{48.f, 107.f, 53.1f},
+	};
+
+	result_matrix = dot_product(test_matrix, another_test_matrix);
+
+
+	test.is_equal(result_matrix == expected_matrix, "expecting matrix dot produce correct matrix");
+}
+
 int main()
 {
 	test_create_file();
+
+	//vector math
 	test_vector_elementwise_multiplication();
 	test_vector_dot_product();
+
+	// statistics math
 	test_median();
 	test_mean();
 
+	// matrix math
+	test_transpose_matrix();
+	test_matrix_dot_product();
 	test.conclude();
 };
 
