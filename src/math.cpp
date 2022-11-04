@@ -53,3 +53,14 @@ float median(vector_t vector)
         return vector[i-1];
     }
 }
+
+float mean(vector_t vector)
+{
+    float vector_sum = 0;
+    if (vector.size() != 0)
+    {
+        for (float element : vector) vector_sum += element;
+        return vector_sum/vector.size();
+    }
+    return vector_sum;
+}

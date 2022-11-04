@@ -118,12 +118,28 @@ void test_median()
 
 }
 
+void test_mean()
+{
+	float test_mean;
+	float expected_test_mean;
+	vector_t test_field;
+	test_field.push_back(60.f);
+	test_field.push_back(1.f);
+	test_field.push_back(100.5f);
+	test_field.push_back(-50.f);
+
+	test_mean = mean(test_field);
+	expected_test_mean = 27.875f;
+	test.is_equal(test_mean == expected_test_mean, "expected mean function to produce " + to_string(expected_test_mean)+ ", got" + to_string(test_mean));
+}
+
 int main()
 {
 	test_create_file();
 	test_vector_elementwise_multiplication();
 	test_vector_dot_product();
 	test_median();
+	test_mean();
 
 	test.conclude();
 };
