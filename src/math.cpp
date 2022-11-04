@@ -32,3 +32,10 @@ float dot_product(std::vector<float> vector1, std::vector<float> vector2)
     }
     return return_value;
 }
+float median(std::vector<float> vector1)
+{
+    if (vector1.size() % 2 == 0)
+    {
+        
+    }
+}
