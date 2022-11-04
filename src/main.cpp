@@ -1,36 +1,40 @@
 #include "tools.hpp"
+#include "types.hpp"
+#include "math.hpp"
 #include <vector>
-
-std::vector<float> vector_element_multiplication(std::vector<float> vector1, std::vector<float> vector2)
-{
-	std::vector<float> return_vector;
-	for (int i = 0; i < vector1.size(); i ++)
-	{
-		return_vector.push_back(vector1[i] * vector2[i]);
-	}
-	return return_vector;
-}
-
 
 int main()
 {
-    //fstream file = create_file("coolfile");
-    //read_file("coolfile.txt");
 
-	std::vector<float> input_field;
-	input_field.push_back(3.f);
-	input_field.push_back(4.f);
-	input_field.push_back(4.f);
+	matrix_t matrix, new_matrix, matrix2;
+	vector_t vec, vec2;
 
-	std::vector<float> input_field2;
-	input_field2.push_back(3.f);
-	input_field2.push_back(4.f);
-	input_field2.push_back(4.f);
+	vec.push_back(2.f);
+	vec.push_back(3.f);
+	vec.push_back(3.f);
 
-	std::vector<float> return_vector = vector_element_multiplication(input_field, input_field2);
+	vec2.push_back(2.f);
+	vec2.push_back(8.f);
+	vec2.push_back(0.3f);
 
-	for (float number : return_vector)
-	{
-		std::cout << number << std::endl;
-	}
+	matrix.push_back(vec);
+	matrix.push_back(vec);
+	matrix.push_back(vec2);
+
+	matrix2.push_back(vec2);
+	matrix2.push_back(vec);
+	matrix2.push_back(vec);
+
+	new_matrix = elementwise_multiplication(matrix2, matrix);
+
+	for (vector_t vect : new_matrix)
+		for (float v : vect)
+			std::cout << v << std::endl;
+
+	std::cout << "..." << std::endl;
+	matrix_t victor = dot_product(matrix, matrix2);
+	for (vector_t vect : victor)
+		for (float v : vect)
+			std::cout << v << std::endl;
+
 }
