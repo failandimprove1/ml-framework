@@ -1,4 +1,7 @@
 #include <vector>
+#include "types.hpp"
+#include <algorithm>
 
-std::vector<float> elementwise_multiplication(std::vector<float> vector1, std::vector<float> vector2);
-float dot_product(std::vector<float> vector1, std::vector<float> vector2);
+vector_t elementwise_multiplication(vector_t, vector_t);
+float dot_product(vector_t, vector_t);
+float median(vector_t);

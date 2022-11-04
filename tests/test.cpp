@@ -2,6 +2,7 @@
 #include "result.hpp"
 #include "testtools.hpp"
 #include "../src/tools.hpp"
+#include "../src/types.hpp"
 #include "../src/math.hpp"
 #include <cassert>
 Test test = Test();
@@ -15,7 +16,8 @@ void test_create_file()
 
 void test_vector_elementwise_multiplication()
 {
-	std::vector<float> test_field1, test_field2, test_field_result, expected_field_results;
+	vector_t test_field1, test_field2, test_field_result, expected_field_results;
+
 	test_field1.push_back(1.5f);
 	test_field1.push_back(2.f);
 	test_field1.push_back(3.f);
@@ -45,7 +47,7 @@ void test_vector_elementwise_multiplication()
 
 void test_vector_dot_product()
 {
-	std::vector<float> test_field1, test_field2;
+	vector_t test_field1, test_field2;
 	float test_result, expected_test_result;
 
 	test_field1.push_back(1.5f);
@@ -67,11 +69,61 @@ void test_vector_dot_product()
 	test.is_equal(test_result == 0, "expected function to return zero when the vectors dimensions are different");
 
 }
+
+void test_median()
+{
+	vector_t test_field;
+	float test_median;
+	float expected_test_median;
+
+	//test #1
+	test_field.push_back(2.f);
+	test_field.push_back(3.f);
+	test_field.push_back(4.f);
+
+	test_median = median(test_field);
+	expected_test_median = 3.f;
+
+	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+
+	//test #2
+	test_field.clear();
+	test_field.push_back(60.f);
+	test_field.push_back(1.f);
+	test_field.push_back(100.f);
+	test_field.push_back(-50.f);
+	
+	test_median = median(test_field);
+	expected_test_median = 30.5f;
+
+	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+
+	//test #3
+	test_field.clear();
+
+	test_median = median(test_field);
+	expected_test_median = 0;
+
+	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+
+	//test #4
+	test_field.clear();
+	test_field.push_back(30.f);
+	test_field.push_back(5.f);
+
+	test_median = median(test_field);
+	expected_test_median = 17.5f;
+
+	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+
+}
+
 int main()
 {
 	test_create_file();
 	test_vector_elementwise_multiplication();
 	test_vector_dot_product();
+	test_median();
 
 	test.conclude();
 };

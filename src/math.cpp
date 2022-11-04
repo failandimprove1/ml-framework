@@ -1,8 +1,8 @@
 #include "math.hpp"
 
-std::vector<float> elementwise_multiplication(std::vector<float> vector1, std::vector<float> vector2)
+vector_t elementwise_multiplication(vector_t vector1, vector_t vector2)
 {
-    std::vector<float> return_vector;
+    vector_t return_vector;
     if(vector1.size() != vector2.size())
     {
         return return_vector;
@@ -17,9 +17,8 @@ std::vector<float> elementwise_multiplication(std::vector<float> vector1, std::v
 }
 
 //https://en.wikipedia.org/wiki/Dot_product
-float dot_product(std::vector<float> vector1, std::vector<float> vector2)
+float dot_product(vector_t vector1, vector_t vector2)
 {
-    
     float return_value = 0;
     if(vector1.size() != vector2.size())
     {
@@ -32,10 +31,25 @@ float dot_product(std::vector<float> vector1, std::vector<float> vector2)
     }
     return return_value;
 }
-float median(std::vector<float> vector1)
+
+float median(vector_t vector)
 {
-    if (vector1.size() % 2 == 0)
+    int size = vector.size();
+
+    std::sort(vector.begin(), vector.end());
+
+    if (size == 0)
     {
-        
+        return 0;
+    }
+    else if (size % 2 == 0)
+    {
+        int i = (size / 2) - 1;
+        return (vector[i] + vector[i+1]) / 2;
+    }
+    else
+    {
+        int i = (size + 1) / 2;
+        return vector[i-1];
     }
 }
