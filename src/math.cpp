@@ -1,7 +1,5 @@
 #include "math.hpp"
-#include <numeric>
-#include <iostream>
-#include <unordered_map>
+
 
 vector_t elementwise_multiplication(vector_t vector1, vector_t vector2)
 {
@@ -150,4 +148,38 @@ float mean(vector_t vector)
         return vector_sum/vector.size();
     }
     return vector_sum;
+}
+
+float sigmoid(float x)
+{
+    return 1/1+exp(-x);
+}
+float tanh(float x)
+{
+    return exp(x) - exp(-x)/exp(x) + exp(-x); 
+}
+
+float max_value(vector_t input)
+{
+    float max = -INFINITY;
+    for (int i = 0; i < input.size(); i++)
+    {
+        max = std::max(max, input[i]);
+    }
+    return max;
+}
+
+vector_t softmax(vector_t input)
+{
+    vector_t output;
+    float sum = 0;
+    float m =  max_value(input);
+    for (int i = 0; i < input.size(); i++)
+        sum += exp(input[i] - m);
+
+    float constant = m + log(sum);
+    for (int i = 0; i < input.size(); i++)
+        output.push_back(exp(input[i] - constant));
+
+    return output;    
 }
