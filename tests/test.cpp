@@ -202,6 +202,17 @@ void test_mode()
 
 }
 
+void test_softmax()
+{
+	vector_t test_vector = {5,5,5,5};
+	vector_t test_softmax = softmax(test_vector);
+	vector_t expected_softmax{0.25, 0.25, 0.25, 0.25};
+	
+	for (int i = 0; i < expected_softmax.size(); i++) 
+		test.is_equal(test_softmax[i] == expected_softmax[i], "softmax function | " + test.produce_error_message(expected_softmax[i], test_softmax[i]));
+
+}
+
 int main()
 {
 	test_create_file();
@@ -214,6 +225,9 @@ int main()
 	test_median();
 	test_mean();
 	test_mode();
+
+	//advanced statistics math
+	test_softmax();
 
 	// matrix math
 	test_transpose_matrix();
