@@ -73,9 +73,7 @@ Authors
 
 made by [Leon](https://github.com/failandimprove1) & [Johannes](https://github.com/joonsey).
 
+
 License
 -------
-
-## License
-
-Released under [MIT](/LICENSE) by [@failandimprove1](https://github.com/failandimprove1).
+Released under [MIT](/license.md) by [@failandimprove1](https://github.com/failandimprove1).
