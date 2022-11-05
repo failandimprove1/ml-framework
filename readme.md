@@ -37,13 +37,14 @@ There are no external libraries or dependancies, which makes it very lightweight
 
 Installation
 ------------
-#This is how to install the program and run it. 
+This is how to install the program and run it. 
 1. Clone the repository:
 ```bash
 git clone https://github.com/failandimprove1/ml-framework/
 ```
 
-##Windows
+Windows
+----
 2. Compile the program with Makefile
 ```bash
 make
@@ -52,7 +53,8 @@ make
 ```bash
 bin/main.exe
 ```
-##Linux
+Linux
+----
 2. Compile the program with Makefile
 ```bash
 make main-linux
@@ -66,7 +68,7 @@ bin/main
 Usage
 -----
 
-Authors-and-history
+Authors 
 -------
 
 made by [Leon](https://github.com/failandimprove1) & [Johannes](https://github.com/joonsey).
