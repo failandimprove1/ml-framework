@@ -175,6 +175,33 @@ void test_matrix_dot_product()
 	test.is_equal(result_matrix == expected_matrix, "expecting matrix dot produce correct matrix");
 }
 
+void test_mode()
+{
+	vector_t test_vector = {2,1,5,5,7,10,-5,10,0};
+	vector_t test_mode = mode(test_vector);
+	vector_t expected_test_mode = {5.f, 10.f};
+
+	
+	for (int i = 0; i < expected_test_mode.size(); i++)
+		test.is_equal(test_mode[i] == expected_test_mode[i], "mode function | " + test.produce_error_message(expected_test_mode[i], test_mode[i]));
+
+	test_vector = {1,2,3,4,5};
+	test_mode = mode(test_vector);
+	expected_test_mode = test_vector;
+
+	for (int i = 0; i < expected_test_mode.size(); i++)
+		test.is_equal(test_mode[i] == expected_test_mode[i], "mode function | " + test.produce_error_message(expected_test_mode[i], test_mode[i]));
+	
+	test_vector = {-100,5,-24,1000,-1,2001,-5,-24,-50,1,-100,-1,-24,90,5,-100,5,1};
+
+	test_mode = mode(test_vector);
+	expected_test_mode = {-100, -24, 5};
+
+	for (int i = 0; i < expected_test_mode.size(); i++) 
+		test.is_equal(test_mode[i] == expected_test_mode[i], "mode function | " + test.produce_error_message(expected_test_mode[i], test_mode[i]));
+
+}
+
 int main()
 {
 	test_create_file();
@@ -186,6 +213,7 @@ int main()
 	// statistics math
 	test_median();
 	test_mean();
+	test_mode();
 
 	// matrix math
 	test_transpose_matrix();

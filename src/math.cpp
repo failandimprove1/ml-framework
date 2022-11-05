@@ -50,26 +50,34 @@ float dot_product(vector_t vector1, vector_t vector2)
     return return_value;
 }
 
-//TODO this is probably bugged
-float mode(vector_t vec)
+vector_t mode(vector_t vec)
 {
 	std::unordered_map<float, int> hashmap;
 
-	float highest_value = 0;
+	int highest_value = 1;
+    vector_t highest_value_keys;
 
 	for( float value_in_vector : vec )
-	{
-		hashmap[value_in_vector] += 1;
-	}
+	    hashmap[value_in_vector] += 1;
+
 
 	for (float value_in_vector : vec)
 	{
-		//TODO here specifically
 		int amount_of_occurences = hashmap[value_in_vector];
 		if(amount_of_occurences > highest_value)
-			highest_value = value_in_vector;
+            highest_value = amount_of_occurences;
+    
 	}
-	return highest_value;
+    for (float value_in_vector : vec)
+    {
+        if (hashmap[value_in_vector] == highest_value)
+        {
+            hashmap[value_in_vector] = 0;
+            highest_value_keys.push_back(value_in_vector);
+        }
+    }
+    sort(highest_value_keys.begin(), highest_value_keys.end());
+	return highest_value_keys;
 }
 
 
