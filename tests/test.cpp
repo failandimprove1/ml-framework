@@ -36,8 +36,9 @@ void test_vector_elementwise_multiplication()
 
 	for (int i = 0; i < test_field1.size(); i++)
 	{
-		test.is_equal(test_field_result[i] == expected_field_results[i] , "expecting elementwise multiplication to produce " + to_string(expected_field_results[i]) + 
-		" but got " + to_string(test_field_result[i]));
+		float x = test_field_result[i];
+		float y = expected_field_results[i];
+		test.is_equal(x == y, "elementwise_multiplication| " + test.produce_error_message(y, x));
 	}
 
 	test_field1.push_back(10.f);
@@ -62,7 +63,7 @@ void test_vector_dot_product()
 	test_result = dot_product(test_field1, test_field2);
 	expected_test_result = 18.f;
 
-	test.is_equal(test_result == expected_test_result, "expected the dot product to produce " + to_string(expected_test_result) + ", got " + to_string(test_result));
+	test.is_equal(test_result == expected_test_result, "dot product | " + test.produce_error_message(expected_test_result, test_result));
 
 	test_field1.push_back(5.f);
 	test_result = dot_product(test_field1, test_field2);
@@ -85,7 +86,7 @@ void test_median()
 	test_median = median(test_field);
 	expected_test_median = 3.f;
 
-	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+	test.is_equal(test_median == expected_test_median, "test median | " + test.produce_error_message(expected_test_median, test_median));
 
 	//test #2
 	test_field.clear();
@@ -96,7 +97,7 @@ void test_median()
 	test_median = median(test_field);
 	expected_test_median = 30.5f;
 
-	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+	test.is_equal(test_median == expected_test_median, "test median | " + test.produce_error_message(expected_test_median, test_median));
 
 	//test #3
 	test_field.clear();
@@ -104,7 +105,7 @@ void test_median()
 	test_median = median(test_field);
 	expected_test_median = 0;
 
-	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+	test.is_equal(test_median == expected_test_median, "test median | " + test.produce_error_message(expected_test_median, test_median));
 
 	//test #4
 	test_field.clear();
@@ -114,7 +115,7 @@ void test_median()
 	test_median = median(test_field);
 	expected_test_median = 17.5f;
 
-	test.is_equal(test_median == expected_test_median, "expected median function to produce " + to_string(expected_test_median) + ", got " + to_string(test_median));
+	test.is_equal(test_median == expected_test_median, "test median | " + test.produce_error_message(expected_test_median, test_median));
 
 }
 
@@ -130,7 +131,7 @@ void test_mean()
 
 	test_mean = mean(test_field);
 	expected_test_mean = 27.875f;
-	test.is_equal(test_mean == expected_test_mean, "expected mean function to produce " + to_string(expected_test_mean)+ ", got" + to_string(test_mean));
+	test.is_equal(test_mean == expected_test_mean, "test mean | " + test.produce_error_message(expected_test_mean, test_mean));
 }
 
 void test_transpose_matrix()
@@ -178,7 +179,7 @@ int main()
 {
 	test_create_file();
 
-	//vector math
+	// vector math
 	test_vector_elementwise_multiplication();
 	test_vector_dot_product();
 
@@ -189,6 +190,8 @@ int main()
 	// matrix math
 	test_transpose_matrix();
 	test_matrix_dot_product();
+
+	// concludes test
 	test.conclude();
 };
 

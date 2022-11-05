@@ -4,23 +4,23 @@ Test::Test() {
 	this->results = new Result();
 };
 
-void Test::is_equal(bool condition, std::string error_msg = "")
+void Test::is_equal(bool condition, string error_msg = "")
 {
 	if (condition) this->results->add_success();
 	else {
-		std::cout << error_msg << std::endl;
+		cout << error_msg << endl;
 		this->results->add_fail();
 	}
 };
 
-std::string Test::format_synapsis(int runs, int fails, int successes)
+string Test::format_synapsis(int runs, int fails, int successes)
 {
-	std::string color_prefix;
+	string color_prefix;
 	if (fails) color_prefix = "\033[1;31m"; // red
 	else color_prefix = "\033[1;32m";		// green
-	return color_prefix + "failed runs: " + std::to_string(fails) +
-		", total runs: " + std::to_string(runs) +
-		", successful runs " + std::to_string(successes) + "\033[m";
+	return color_prefix + "failed runs: " + to_string(fails) +
+		", total runs: " + to_string(runs) +
+		", successful runs " + to_string(successes) + "\033[m";
 };
 
 void Test::conclude()
@@ -30,10 +30,26 @@ void Test::conclude()
 	int fails = this->results->get_fails();
 	int successes = this->results->get_successes();
 
-	std::string synapsis_message = this->format_synapsis(runs, fails, successes);
-	std::cout << synapsis_message << std::endl;
+	string synapsis_message = this->format_synapsis(runs, fails, successes);
+	cout << synapsis_message << endl;
 
 	if (fails) return_code = 1;
 	exit(return_code);
 };
+
+// pre- or suffix this with a identification of the test that was run
+// ie: produce_error_message() + "| dot product"
+// or: "| dot product" + produce_error_message()
+string Test::produce_error_message(int expected, int got)
+{
+	return "expected: " + to_string(expected) + " got: " + to_string(got);
+}
+
+// pre- or suffix this with a identification of the test that was run
+// ie: produce_error_message() + "| dot product"
+// or: "| dot product" + produce_error_message()
+string Test::produce_error_message(float expected, float got)
+{
+	return "expected: " + to_string(expected) + " got: " + to_string(got);
+}
 
