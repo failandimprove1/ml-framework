@@ -1,6 +1,7 @@
 #include "math.hpp"
 #include <numeric>
 #include <iostream>
+#include <unordered_map>
 
 vector_t elementwise_multiplication(vector_t vector1, vector_t vector2)
 {
@@ -47,6 +48,28 @@ float dot_product(vector_t vector1, vector_t vector2)
         return_value += vector1[i] * vector2[i];
     }
     return return_value;
+}
+
+//TODO this is probably bugged
+float mode(vector_t vec)
+{
+	std::unordered_map<float, int> hashmap;
+
+	float highest_value = 0;
+
+	for( float value_in_vector : vec )
+	{
+		hashmap[value_in_vector] += 1;
+	}
+
+	for (float value_in_vector : vec)
+	{
+		//TODO here specifically
+		int amount_of_occurences = hashmap[value_in_vector];
+		if(amount_of_occurences > highest_value)
+			highest_value = value_in_vector;
+	}
+	return highest_value;
 }
 
 

@@ -10,3 +10,4 @@ matrix_t transpose_matrix(matrix_t &matrix);
 float dot_product(vector_t, vector_t);
 float median(vector_t);
 float mean(vector_t);
+float mode(vector_t vec);
