@@ -3,32 +3,113 @@
 #include "math.hpp"
 #include <vector>
 
-int main()
+vector_t parse_csv_row(string streambuffer)
 {
+	vector_t row;
+	string value;
+	for (auto x : streambuffer)
+	{
+		// checks for comma to push
+		// to vector and reset string buffer
+		if(x == ',')
+		{
+			row.push_back(stof(value));
+			value = "";
+		}
 
-	matrix_t matrix, new_matrix, matrix2;
-	vector_t vec, vec2, modes;
+		else
+			value += x;
+	}
 
-	vec.push_back(2.f);
-	vec.push_back(3.f);
-	vec.push_back(3.f);
-	vec.push_back(8.f);
-	vec.push_back(8.f);
-	vec.push_back(6.f);
-	vec.push_back(6.f);
-	vec.push_back(6.f);
-	vec.push_back(8.f);
-	vec.push_back(8.f);
-	vec.push_back(8.f);
-	vec.push_back(8.f);
-	vec.push_back(8.f);
-	vec.push_back(8.f);
+	// pushes the trailing information as the one above
+	// only pushes upon encountering comma which leads this
+	// to not push the last string buffer, aka.
+	// the last value in the row
+	row.push_back(stof(value));
+	return row;
+}
 
-	vec2.push_back(2.f);
-	vec2.push_back(8.f);
-	vec2.push_back(0.3f);
+vector_t get_from_index(matrix_t data, int index)
+{
+	vector_t y;
 
-	modes = mode(vec);	
-	for (int i = 0; i < modes.size(); i++) std::cout << modes[i] << std::endl;
+	if(index > data[0].size())
+	{
+		cerr << "ERROR: get_from_index index parameter out of range" << endl;
+		return y;
+	}
+
+	for (int i = 0; i < data.size(); i++)
+		y.push_back(data[i][index]);
+
+	return y;
+}
+
+matrix_t get_from_index(matrix_t data, vector_t index)
+{
+	matrix_t x;
+
+	for (float i : index)
+		x.push_back(get_from_index(data, (int)i));
+
+	return x;
+}
+
+
+// extracts every value of a certain index
+// index_of_y being the index that gets mapped to the return vector
+vector_t extract_y_values(matrix_t data, int index_of_y = 1)
+{
+	return get_from_index(data, index_of_y);
+}
+
+matrix_t load_csv(const string filename, bool skip_first_line = true)
+{
+    string filestreambuffer;
+    fstream filestream;
+	matrix_t data;
+
+    if (!filestream.is_open())
+        filestream.open(filename, ios::in);
+
+    while (getline(filestream, filestreambuffer))
+		if (skip_first_line) skip_first_line = false;
+		else data.push_back(parse_csv_row(filestreambuffer));
+
+    filestream.close();
+
+	return data;
+
+}
+
+void pretty_print_matrix(matrix_t x)
+{
+	int amount_of_rows = x[0].size();
+	int amount_of_columns = x.size();
+	for (int i = 0; i < amount_of_rows; i++)
+		for (int j = 0; j < amount_of_columns; j++)
+			(j == amount_of_columns-1) ? cout << x[j][i] << endl: cout << x[j][i] << ", ";
+}
+
+void print_matrix(matrix_t x, bool pretty_formating = false)
+{
+	if (pretty_formating) pretty_print_matrix(x);
+	else {
+		for (int i = 0; i < x.size(); i++)
+			for (int j = 0; j < x[i].size(); j++)
+				cout << x[i][j] << endl;
+	}
+}
+
+int main(int argc, char** argv)
+{
+	matrix_t data = load_csv("data.csv");
+	vector_t y = extract_y_values(data);
+
+	vector_t indexes = {0,2,3};
+	matrix_t x = get_from_index(data, indexes);
+
+	pretty_print_matrix(x);
+
 
 }

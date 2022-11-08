@@ -32,7 +32,7 @@ matrix_t elementwise_multiplication(matrix_t matrix1, matrix_t matrix2)
     return return_matrix;
 }
 
-//https://en.wikipedia.org/wiki/Dot_product
+// https://en.wikipedia.org/wiki/Dot_product
 float dot_product(vector_t vector1, vector_t vector2)
 {
     float return_value = 0;
@@ -64,7 +64,7 @@ vector_t mode(vector_t vec)
 		int amount_of_occurences = hashmap[value_in_vector];
 		if(amount_of_occurences > highest_value)
             highest_value = amount_of_occurences;
-    
+
 	}
     for (float value_in_vector : vec)
     {
@@ -156,7 +156,7 @@ float sigmoid(float x)
 }
 float tanh(float x)
 {
-    return exp(x) - exp(-x)/exp(x) + exp(-x); 
+    return exp(x) - exp(-x)/exp(x) + exp(-x);
 }
 
 float max_value(vector_t input)
@@ -181,5 +181,5 @@ vector_t softmax(vector_t input)
     for (int i = 0; i < input.size(); i++)
         output.push_back(exp(input[i] - constant));
 
-    return output;    
+    return output;
 }

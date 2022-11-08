@@ -26,3 +26,4 @@ void read_file(string filename)
 
     filestream.close();
 }
+
