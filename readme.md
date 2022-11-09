@@ -68,7 +68,7 @@ bin/main
 Usage
 -----
 Example of usages here:
-* [![basic usage](usage.md)]
+* [basic usage](usage.md)
 
 Authors 
 -------
