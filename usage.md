@@ -1,3 +1,8 @@
+
+# Basic Usage
+
+This is an example on how to load your desired data file and seperate the rows in to vectors / matrices
+```c++
 #include "tools.hpp"
 #include "types.hpp"
 #include "math.hpp"
@@ -12,3 +17,6 @@ int main(int argc, char** argv)
 
 	pretty_print_matrix(x);
 }
+```
+
+
