@@ -32,51 +32,6 @@ matrix_t elementwise_multiplication(matrix_t matrix1, matrix_t matrix2)
     return return_matrix;
 }
 
-// https://en.wikipedia.org/wiki/Dot_product
-float dot_product(vector_t vector1, vector_t vector2)
-{
-    float return_value = 0;
-    if(vector1.size() != vector2.size())
-    {
-        return return_value;
-    }
-
-    for (int i = 0; i < vector1.size(); i++)
-    {
-        return_value += vector1[i] * vector2[i];
-    }
-    return return_value;
-}
-
-vector_t mode(vector_t vec)
-{
-	std::unordered_map<float, int> hashmap;
-
-	int highest_value = 1;
-    vector_t highest_value_keys;
-
-	for( float value_in_vector : vec )
-	    hashmap[value_in_vector] += 1;
-
-
-	for (float value_in_vector : vec)
-	{
-		int amount_of_occurences = hashmap[value_in_vector];
-		if(amount_of_occurences > highest_value)
-            highest_value = amount_of_occurences;
-
-	}
-    for (float value_in_vector : vec)
-    {
-        if (hashmap[value_in_vector] == highest_value)
-        {
-            hashmap[value_in_vector] = 0;
-            highest_value_keys.push_back(value_in_vector);
-        }
-    }
-    sort(highest_value_keys.begin(), highest_value_keys.end());
-	return highest_value_keys;
-}
 
 matrix_t transpose_matrix(matrix_t &matrix)
 {
@@ -100,20 +55,61 @@ matrix_t transpose_matrix(matrix_t &matrix)
 	return transposed_matrix;
 }
 
+// https://en.wikipedia.org/wiki/Dot_product
+float dot_product(vector_t vector1, vector_t vector2)
+{
+    float return_value = 0;
+    if(vector1.size() != vector2.size())
+    {
+		cerr << "dot_product vectors are incompatable" << endl;
+        return return_value;
+    }
+
+    for (int i = 0; i < vector1.size(); i++)
+    {
+        return_value += vector1[i] * vector2[i];
+    }
+    return return_value;
+}
+
 matrix_t dot_product(matrix_t matrix1, matrix_t matrix2)
 {
 	vector_t result_vec;
 	matrix_t return_matrix;
-	transpose_matrix(matrix2);
 
+	int m1,m2,n1,n2;
+	m1 = matrix1.size();
+	m2 = matrix2.size();
+	n1 = matrix1[0].size();
+	n2 = matrix2[0].size();
 
-	for (int i = 0; i < matrix1.size(); i++)
+	if (m1 != m2 && m1 != n2 && m2 != n1)
 	{
-		for (int j = 0; j < matrix1[i].size(); j++)
-			result_vec.push_back(dot_product(matrix1[i], matrix2[j]));
+		cerr << "dot_product matrices are incompatable" << endl;
+		return return_matrix;
+	}
+	else if (m1 == m2)
+	{
+		transpose_matrix(matrix2);
+		transpose_matrix(matrix1);
+		m1 = matrix1.size();
+		m2 = matrix2.size();
+		n1 = matrix1[0].size();
+		n2 = matrix2[0].size();
+	}
 
-		return_matrix.push_back(result_vec);
-		result_vec.clear();
+	// if n1 != n2 they will not be able to be computed within the
+	// vector_t dot_product(vector_t) function
+	if (n1 == n2)
+	{
+		for (int i = 0; i < m1; i++)
+		{
+			for (int j = 0; j < m2; j++)
+				result_vec.push_back(dot_product(matrix1[i], matrix2[j]));
+
+			return_matrix.push_back(result_vec);
+			result_vec.clear();
+		}
 	}
 	return return_matrix;
 }
@@ -149,6 +145,36 @@ float mean(vector_t vector)
         return vector_sum/vector.size();
     }
     return vector_sum;
+}
+
+vector_t mode(vector_t vec)
+{
+	std::unordered_map<float, int> hashmap;
+
+	int highest_value = 1;
+    vector_t highest_value_keys;
+
+	for( float value_in_vector : vec )
+	    hashmap[value_in_vector] += 1;
+
+
+	for (float value_in_vector : vec)
+	{
+		int amount_of_occurences = hashmap[value_in_vector];
+		if(amount_of_occurences > highest_value)
+            highest_value = amount_of_occurences;
+
+	}
+    for (float value_in_vector : vec)
+    {
+        if (hashmap[value_in_vector] == highest_value)
+        {
+            hashmap[value_in_vector] = 0;
+            highest_value_keys.push_back(value_in_vector);
+        }
+    }
+    sort(highest_value_keys.begin(), highest_value_keys.end());
+	return highest_value_keys;
 }
 
 float sigmoid(float x)
