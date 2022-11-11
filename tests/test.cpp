@@ -142,10 +142,11 @@ void test_transpose_matrix()
 	to_be_transposed_matrix = {{4.f, 2.f}, {3.f,2.f}};
 	transposed_matrix = {{4.f, 3.f}, {2.f,2.f}};
 
-	test.is_equal(to_be_transposed_matrix != transposed_matrix, "expecting matrices to NOT be equal when NOT transposed");
+	test.is_equal(to_be_transposed_matrix != transposed_matrix, test.produce_error_message(to_be_transposed_matrix, transposed_matrix));
+
 	transpose_matrix(transposed_matrix);
 
-	test.is_equal(to_be_transposed_matrix == transposed_matrix, "expecting matrices to be the equal when transposed");
+	test.is_equal(to_be_transposed_matrix == transposed_matrix, test.produce_error_message(to_be_transposed_matrix, transposed_matrix));
 }
 
 void test_matrix_dot_product()

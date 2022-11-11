@@ -53,3 +53,9 @@ string Test::produce_error_message(float expected, float got)
 	return "expected: " + to_string(expected) + " got: " + to_string(got);
 }
 
+string Test::produce_error_message(matrix_t expected, matrix_t got)
+{
+	string expected_string = pretty_format_matrix_to_string(expected);
+	string got_string = pretty_format_matrix_to_string(got);
+	return "expected: \n" + expected_string + " got: \n" + got_string;
+}

@@ -103,14 +103,20 @@ matrix_t load_csv(const string filename, bool skip_first_line)
 	return data;
 
 }
-
-void pretty_print_matrix(matrix_t x)
+string pretty_format_matrix_to_string(matrix_t x)
 {
+	stringstream formated_matrix_string;
 	int amount_of_rows = x[0].size();
 	int amount_of_columns = x.size();
 	for (int i = 0; i < amount_of_rows; i++)
 		for (int j = 0; j < amount_of_columns; j++)
-			(j == amount_of_columns-1) ? cout << x[j][i] << endl: cout << x[j][i] << ", ";
+			(j == amount_of_columns-1) ? formated_matrix_string << to_string(x[j][i]) << endl: formated_matrix_string << to_string(x[j][i]) << ", ";
+
+	return formated_matrix_string.str();
+}
+void pretty_print_matrix(matrix_t x)
+{
+	cout << pretty_format_matrix_to_string(x) << endl;
 }
 
 void print_matrix(matrix_t x, bool pretty_formating)
