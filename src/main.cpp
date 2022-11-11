@@ -11,4 +11,6 @@ int main(int argc, char** argv)
 	matrix_t x = get_from_index(data, indexes);
 
 	pretty_print_matrix(x);
+	transpose_matrix(x);
+	pretty_print_matrix(x);
 }

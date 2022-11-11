@@ -78,20 +78,21 @@ vector_t mode(vector_t vec)
 	return highest_value_keys;
 }
 
-
-
 matrix_t transpose_matrix(matrix_t &matrix)
 {
 	matrix_t transposed_matrix;
 	vector_t transposed_vector;
 
-	for (int x = 0; x < matrix.size(); x++)
+	int max_y = matrix[0].size();
+	int max_x = matrix.size();
+	for (int x = 0; x < max_y; x++)
 	{
-		for (int y = 0; y < matrix[x].size(); y ++)
+		for (int y = 0; y < max_x; y ++)
 		{
 			float val = matrix[y][x];
 			transposed_vector.push_back(val);
 		}
+
 		transposed_matrix.push_back(transposed_vector);
 		transposed_vector.clear();
 	}
