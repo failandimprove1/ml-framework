@@ -169,6 +169,7 @@ void test_matrix_dot_product()
 		{30.f, 65.f, 34.2f,},
 		{48.f, 107.f, 53.1f},
 	};
+	transpose_matrix(another_test_matrix);
 
 	result_matrix = dot_product(test_matrix, another_test_matrix);
 
