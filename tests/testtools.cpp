@@ -57,5 +57,5 @@ string Test::produce_error_message(matrix_t expected, matrix_t got)
 {
 	string expected_string = pretty_format_matrix_to_string(expected);
 	string got_string = pretty_format_matrix_to_string(got);
-	return "expected: \n" + expected_string + " got: \n" + got_string;
+	return "expected: \n" + expected_string + "got: \n" + got_string;
 }

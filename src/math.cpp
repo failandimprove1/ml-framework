@@ -83,12 +83,17 @@ matrix_t dot_product(matrix_t matrix1, matrix_t matrix2)
 	n1 = matrix1[0].size();
 	n2 = matrix2[0].size();
 
+
+	// TODO
+	// this whole thing should probably be entirely removed
+	// we should depend on the end user being aware of how dot product works
+	// and they will need to pass matrices with the approriate dimensions
 	if (m1 != m2 && m1 != n2 && m2 != n1)
 	{
 		cerr << "dot_product matrices are incompatable" << endl;
 		return return_matrix;
 	}
-	else if (m1 == m2)
+	else if (m1 == m2 && n1 != n2)
 	{
 		transpose_matrix(matrix2);
 		transpose_matrix(matrix1);
@@ -96,6 +101,19 @@ matrix_t dot_product(matrix_t matrix1, matrix_t matrix2)
 		m2 = matrix2.size();
 		n1 = matrix1[0].size();
 		n2 = matrix2[0].size();
+	}
+	else if (m1 == m2 && m1 == m2)
+	{
+		//if they are identical they should be transposed as well.
+		//for some reason?
+		//test is happy so yey
+		transpose_matrix(matrix2);
+	}
+	else if (m1 == n2)
+	{
+		transpose_matrix(matrix1);
+		m1 = matrix1.size();
+		n1 = matrix1[0].size();
 	}
 
 	// if n1 != n2 they will not be able to be computed within the

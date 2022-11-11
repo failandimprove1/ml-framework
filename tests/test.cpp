@@ -173,7 +173,37 @@ void test_matrix_dot_product()
 	result_matrix = dot_product(test_matrix, another_test_matrix);
 
 
-	test.is_equal(result_matrix == expected_matrix, "expecting matrix dot produce correct matrix");
+	test.is_equal(result_matrix == expected_matrix, test.produce_error_message(expected_matrix, result_matrix));
+}
+
+void test_advanced_matrix_dot_product()
+{
+	matrix_t test_matrix, another_test_matrix, result_matrix;
+	matrix_t expected_matrix;
+	test_matrix = {
+		{1.f, 2.f, 3.f,},
+		{4.f, 5.f, 6.f,},
+		{7.f, 8.f, 9.f},
+	};
+	another_test_matrix = {
+		{2.f, 8.f, 0.3f,},
+		{2.f, 3.f, 3.f,}
+	};
+	expected_matrix = {
+		{18.9f, 17.f},
+		{49.8f, 41.f},
+		{80.7f, 65.f},
+	};
+
+	result_matrix = dot_product(test_matrix, another_test_matrix);
+
+	int m, n;
+	m = result_matrix.size();
+	n = result_matrix[0].size();
+	test.is_equal(2 == n, "advanced dot product | " + test.produce_error_message(2, n));
+	test.is_equal(3 == m, "advanced dot product | " + test.produce_error_message(3, m));
+	test.is_equal(result_matrix == expected_matrix, test.produce_error_message(expected_matrix, result_matrix));
+
 }
 
 void test_mode()
@@ -182,7 +212,7 @@ void test_mode()
 	vector_t test_mode = mode(test_vector);
 	vector_t expected_test_mode = {5.f, 10.f};
 
-	
+
 	for (int i = 0; i < expected_test_mode.size(); i++)
 		test.is_equal(test_mode[i] == expected_test_mode[i], "mode function | " + test.produce_error_message(expected_test_mode[i], test_mode[i]));
 
@@ -192,13 +222,13 @@ void test_mode()
 
 	for (int i = 0; i < expected_test_mode.size(); i++)
 		test.is_equal(test_mode[i] == expected_test_mode[i], "mode function | " + test.produce_error_message(expected_test_mode[i], test_mode[i]));
-	
+
 	test_vector = {-100,5,-24,1000,-1,2001,-5,-24,-50,1,-100,-1,-24,90,5,-100,5,1};
 
 	test_mode = mode(test_vector);
 	expected_test_mode = {-100, -24, 5};
 
-	for (int i = 0; i < expected_test_mode.size(); i++) 
+	for (int i = 0; i < expected_test_mode.size(); i++)
 		test.is_equal(test_mode[i] == expected_test_mode[i], "mode function | " + test.produce_error_message(expected_test_mode[i], test_mode[i]));
 
 }
@@ -208,8 +238,8 @@ void test_softmax()
 	vector_t test_vector = {5,5,5,5};
 	vector_t test_softmax = softmax(test_vector);
 	vector_t expected_softmax{0.25, 0.25, 0.25, 0.25};
-	
-	for (int i = 0; i < expected_softmax.size(); i++) 
+
+	for (int i = 0; i < expected_softmax.size(); i++)
 		test.is_equal(test_softmax[i] == expected_softmax[i], "softmax function | " + test.produce_error_message(expected_softmax[i], test_softmax[i]));
 
 }
@@ -233,6 +263,9 @@ int main()
 	// matrix math
 	test_transpose_matrix();
 	test_matrix_dot_product();
+
+	// advanced matrix math
+	test_advanced_matrix_dot_product();
 
 	// concludes test
 	test.conclude();
