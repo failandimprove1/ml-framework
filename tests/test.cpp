@@ -169,11 +169,8 @@ void test_matrix_dot_product()
 		{30.f, 65.f, 34.2f,},
 		{48.f, 107.f, 53.1f},
 	};
-	transpose_matrix(another_test_matrix);
 
 	result_matrix = dot_product(test_matrix, another_test_matrix);
-
-
 	test.is_equal(result_matrix == expected_matrix, test.produce_error_message(expected_matrix, result_matrix));
 }
 
@@ -187,14 +184,18 @@ void test_advanced_matrix_dot_product()
 		{7.f, 8.f, 9.f},
 	};
 	another_test_matrix = {
-		{2.f, 8.f, 0.3f,},
-		{2.f, 3.f, 3.f,}
+		{2.f, 8.f, 0.3f},
+		{2.f, 3.f, 3.f}
 	};
 	expected_matrix = {
 		{18.9f, 17.f},
 		{49.8f, 41.f},
 		{80.7f, 65.f},
 	};
+
+	// this needs to be transposed because you cannot take a
+	// (3,3) sized matrix and mulitply it with a (2,3)
+	transpose_matrix(another_test_matrix);
 
 	result_matrix = dot_product(test_matrix, another_test_matrix);
 
@@ -203,7 +204,7 @@ void test_advanced_matrix_dot_product()
 	n = result_matrix[0].size();
 	test.is_equal(2 == n, "advanced dot product | " + test.produce_error_message(2, n));
 	test.is_equal(3 == m, "advanced dot product | " + test.produce_error_message(3, m));
-	test.is_equal(result_matrix == expected_matrix, test.produce_error_message(expected_matrix, result_matrix));
+	test.is_equal(result_matrix == expected_matrix,"advanced dot product | " + test.produce_error_message(expected_matrix, result_matrix));
 
 }
 
@@ -212,7 +213,6 @@ void test_mode()
 	vector_t test_vector = {2,1,5,5,7,10,-5,10,0};
 	vector_t test_mode = mode(test_vector);
 	vector_t expected_test_mode = {5.f, 10.f};
-
 
 	for (int i = 0; i < expected_test_mode.size(); i++)
 		test.is_equal(test_mode[i] == expected_test_mode[i], "mode function | " + test.produce_error_message(expected_test_mode[i], test_mode[i]));

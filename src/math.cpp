@@ -61,7 +61,6 @@ float dot_product(vector_t vector1, vector_t vector2)
     float return_value = 0;
     if(vector1.size() != vector2.size())
     {
-		cerr << "dot_product vectors are incompatable" << endl;
         return return_value;
     }
 
@@ -72,11 +71,20 @@ float dot_product(vector_t vector1, vector_t vector2)
     return return_value;
 }
 
+// takes two matrices with (m,n) dimensions and produces the dot product of them
+// NOTE: input matrices follow the laws of mathematics where n1 == m2
+// You should transpose the matrices before calling this function if dimensions are incompatable
+//
+// example:
+// (3,3) x (2,3) == error
+// (3,3) x (3,2) == OK
+//
 matrix_t dot_product(matrix_t matrix1, matrix_t matrix2)
 {
 	vector_t result_vec;
 	matrix_t return_matrix;
 
+	transpose_matrix(matrix2);
 	int m1,m2,n1,n2;
 	m1 = matrix1.size();
 	m2 = matrix2.size();
