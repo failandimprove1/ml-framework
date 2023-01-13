@@ -32,7 +32,30 @@ matrix_t elementwise_multiplication(matrix_t matrix1, matrix_t matrix2)
     return return_matrix;
 }
 
-//https://en.wikipedia.org/wiki/Dot_product
+
+matrix_t transpose_matrix(matrix_t &matrix)
+{
+	matrix_t transposed_matrix;
+	vector_t transposed_vector;
+
+	int max_y = matrix[0].size();
+	int max_x = matrix.size();
+	for (int x = 0; x < max_y; x++)
+	{
+		for (int y = 0; y < max_x; y ++)
+		{
+			float val = matrix[y][x];
+			transposed_vector.push_back(val);
+		}
+
+		transposed_matrix.push_back(transposed_vector);
+		transposed_vector.clear();
+	}
+	matrix = transposed_matrix;
+	return transposed_matrix;
+}
+
+// https://en.wikipedia.org/wiki/Dot_product
 float dot_product(vector_t vector1, vector_t vector2)
 {
     float return_value = 0;
@@ -48,72 +71,38 @@ float dot_product(vector_t vector1, vector_t vector2)
     return return_value;
 }
 
-vector_t mode(vector_t vec)
-{
-	std::unordered_map<float, int> hashmap;
-
-	int highest_value = 1;
-    vector_t highest_value_keys;
-
-	for( float value_in_vector : vec )
-	    hashmap[value_in_vector] += 1;
-
-
-	for (float value_in_vector : vec)
-	{
-		int amount_of_occurences = hashmap[value_in_vector];
-		if(amount_of_occurences > highest_value)
-            highest_value = amount_of_occurences;
-    
-	}
-    for (float value_in_vector : vec)
-    {
-        if (hashmap[value_in_vector] == highest_value)
-        {
-            hashmap[value_in_vector] = 0;
-            highest_value_keys.push_back(value_in_vector);
-        }
-    }
-    sort(highest_value_keys.begin(), highest_value_keys.end());
-	return highest_value_keys;
-}
-
-
-
-matrix_t transpose_matrix(matrix_t &matrix)
-{
-	matrix_t transposed_matrix;
-	vector_t transposed_vector;
-
-	for (int x = 0; x < matrix.size(); x++)
-	{
-		for (int y = 0; y < matrix[x].size(); y ++)
-		{
-			float val = matrix[y][x];
-			transposed_vector.push_back(val);
-		}
-		transposed_matrix.push_back(transposed_vector);
-		transposed_vector.clear();
-	}
-	matrix = transposed_matrix;
-	return transposed_matrix;
-}
-
+// takes two matrices with (m,n) dimensions and produces the dot product of them
+// NOTE: input matrices follow the laws of mathematics where n1 == m2
+// You should transpose the matrices before calling this function if dimensions are incompatable
+//
+// example:
+// (3,3) x (2,3) == error
+// (3,3) x (3,2) == OK
+//
 matrix_t dot_product(matrix_t matrix1, matrix_t matrix2)
 {
 	vector_t result_vec;
 	matrix_t return_matrix;
+
 	transpose_matrix(matrix2);
-
-
-	for (int i = 0; i < matrix1.size(); i++)
+	int m1,m2,n1,n2;
+	m1 = matrix1.size();
+	m2 = matrix2.size();
+	n1 = matrix1[0].size();
+	n2 = matrix2[0].size();
+	if (n1 == n2)
 	{
-		for (int j = 0; j < matrix1[i].size(); j++)
-			result_vec.push_back(dot_product(matrix1[i], matrix2[j]));
+		for (int i = 0; i < m1; i++)
+		{
+			for (int j = 0; j < m2; j++)
+				result_vec.push_back(dot_product(matrix1[i], matrix2[j]));
 
-		return_matrix.push_back(result_vec);
-		result_vec.clear();
+			return_matrix.push_back(result_vec);
+			result_vec.clear();
+		}
 	}
+	else
+		cerr << "ERORR: invalid dimensions for dot product" << endl << "size:"<<m1<<","<<n1<<" incompatable with size:"<<m2<<","<<n2<<endl;
 	return return_matrix;
 }
 
@@ -150,13 +139,43 @@ float mean(vector_t vector)
     return vector_sum;
 }
 
+vector_t mode(vector_t vec)
+{
+	std::unordered_map<float, int> hashmap;
+
+	int highest_value = 1;
+    vector_t highest_value_keys;
+
+	for( float value_in_vector : vec )
+	    hashmap[value_in_vector] += 1;
+
+
+	for (float value_in_vector : vec)
+	{
+		int amount_of_occurences = hashmap[value_in_vector];
+		if(amount_of_occurences > highest_value)
+            highest_value = amount_of_occurences;
+
+	}
+    for (float value_in_vector : vec)
+    {
+        if (hashmap[value_in_vector] == highest_value)
+        {
+            hashmap[value_in_vector] = 0;
+            highest_value_keys.push_back(value_in_vector);
+        }
+    }
+    sort(highest_value_keys.begin(), highest_value_keys.end());
+	return highest_value_keys;
+}
+
 float sigmoid(float x)
 {
     return 1/1+exp(-x);
 }
 float tanh(float x)
 {
-    return exp(x) - exp(-x)/exp(x) + exp(-x); 
+    return exp(x) - exp(-x)/exp(x) + exp(-x);
 }
 
 float max_value(vector_t input)
@@ -181,5 +200,5 @@ vector_t softmax(vector_t input)
     for (int i = 0; i < input.size(); i++)
         output.push_back(exp(input[i] - constant));
 
-    return output;    
+    return output;
 }

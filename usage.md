@@ -1,3 +1,8 @@
+
+# Basic Usage
+
+This is an example on how to load your desired data file and seperate the rows in to vectors / matrices
+```c++
 #include "tools.hpp"
 #include "types.hpp"
 #include "math.hpp"
@@ -9,10 +14,9 @@ int main(int argc, char** argv)
 
 	vector_t indexes = {0,2,3};
 	matrix_t x = get_from_index(data, indexes);
-	matrix_t t = {{2,2},{2,2},{2,2}};
-	transpose_matrix(x);
-	matrix_t r = dot_product(x, t);
-	//pretty_print_matrix(x);
-	transpose_matrix(r);
-	pretty_print_matrix(r);
+
+	pretty_print_matrix(x);
 }
+```
+
+
