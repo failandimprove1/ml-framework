@@ -33,7 +33,7 @@ matrix_t elementwise_multiplication(matrix_t matrix1, matrix_t matrix2)
 }
 
 
-matrix_t transpose_matrix(matrix_t &matrix)
+void transpose_matrix(matrix_t &matrix)
 {
 	matrix_t transposed_matrix;
 	vector_t transposed_vector;
@@ -52,7 +52,7 @@ matrix_t transpose_matrix(matrix_t &matrix)
 		transposed_vector.clear();
 	}
 	matrix = transposed_matrix;
-	return transposed_matrix;
+	return;
 }
 
 // https://en.wikipedia.org/wiki/Dot_product
