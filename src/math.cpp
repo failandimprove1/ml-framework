@@ -202,3 +202,32 @@ vector_t softmax(vector_t input)
 
     return output;
 }
+
+matrix_t split_matrix(matrix_t* input, float percent)
+{
+    matrix_t validation_matrix;
+
+    if (percent < 0.01f)
+    {
+        cerr << "The input percent at which the matrix splits has to be larger than or equal to 1%" << endl;
+        return validation_matrix;
+    }
+    else if (percent > 1)
+    {
+        cerr << "The input percent at which the matrix splits has to be smaller than 100% (less than 1)" << endl;
+        return validation_matrix;
+    }
+    int rows = input->size();
+    int split_point = (int) (rows * percent);
+    int remaining_elements = rows - split_point;
+
+    for (int i = 0; i < remaining_elements; i++)
+    {
+        validation_matrix.push_back(input->at(split_point + i));
+    }
+    for (int i = 0; i < remaining_elements; i++)
+    {
+        input->pop_back();
+    }
+    return validation_matrix;
+}

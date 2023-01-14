@@ -20,3 +20,4 @@ vector_t mode(vector_t);
 float sigmoid(float);
 float tanh(float);
 vector_t softmax(vector_t);
+matrix_t split_matrix(matrix_t*, float);
