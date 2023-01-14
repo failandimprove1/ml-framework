@@ -1,4 +1,5 @@
 #include "tools.hpp"
+#include "math.hpp"
 
 fstream create_file(string filename)
 {
@@ -105,6 +106,7 @@ matrix_t load_csv(const string filename, bool skip_first_line)
 }
 string pretty_format_matrix_to_string(matrix_t x)
 {
+    transpose_matrix(x);
 	stringstream formated_matrix_string;
 	int amount_of_rows = x[0].size();
 	int amount_of_columns = x.size();

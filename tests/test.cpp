@@ -245,6 +245,78 @@ void test_softmax()
 
 }
 
+void test_split_matrix()
+{
+	matrix_t test_matrix;
+	matrix_t expected_validation_matrix;
+	matrix_t expected_test_matrix;
+	matrix_t validation_matrix;
+
+	test_matrix = {
+		{2,3,10},
+		{10,-10,5},
+		{5,1000,10},
+		{1.5f, 10.1f, 6},
+		{6.4f, 91, 1},
+		{8.8f, 1.1f, 100},
+		{1.5f, 60, 61},
+		{1.5f, 10.1f, 6},
+		{4, 5, 0},
+		{1.5f, 10.1f, 6}
+		};
+		expected_test_matrix = {
+		{2,3,10},
+		{10,-10,5},
+		{5,1000,10},
+		{1.5f, 10.1f, 6},
+		{6.4f, 91, 1},
+		};
+	expected_validation_matrix = {
+		{8.8f, 1.1f, 100},
+		{1.5f, 60, 61},
+		{1.5f, 10.1f, 6},
+		{4, 5, 0},
+		{1.5f, 10.1f, 6}
+		};
+
+
+	validation_matrix = split_matrix(&test_matrix, 0.5f);
+	test.is_equal(validation_matrix == expected_validation_matrix, "split matrix | " + test.produce_error_message(expected_validation_matrix, validation_matrix));
+	test.is_equal(test_matrix == expected_test_matrix, "split matrix | " + test.produce_error_message(expected_test_matrix, test_matrix));
+
+	test_matrix = {
+		{2,3,10},
+		{10,-10,5},
+		{5,1000,10},
+		{1.5f, 10.1f, 6},
+		{6.4f, 91, 1},
+		{8.8f, 1.1f, 100},
+		{1.5f, 60, 61},
+		{1.5f, 10.1f, 6},
+		{4, 5, 0},
+		{1.5f, 10.1f, 6}
+		};
+		expected_test_matrix = {
+		{2,3,10},
+		{10,-10,5},
+		{5,1000,10},
+		{1.5f, 10.1f, 6}
+		};
+	expected_validation_matrix = {
+		{6.4f, 91, 1},
+		{8.8f, 1.1f, 100},
+		{1.5f, 60, 61},
+		{1.5f, 10.1f, 6},
+		{4, 5, 0},
+		{1.5f, 10.1f, 6}
+		};
+
+	
+	validation_matrix = split_matrix(&test_matrix, 0.4f);
+	test.is_equal(validation_matrix == expected_validation_matrix, "split matrix | " + test.produce_error_message(expected_validation_matrix, validation_matrix));
+	test.is_equal(test_matrix == expected_test_matrix, "split matrix | " + test.produce_error_message(expected_test_matrix, test_matrix));
+}
+
 int main()
 {
 	test_create_file();
@@ -267,6 +339,9 @@ int main()
 
 	// advanced matrix math
 	test_advanced_matrix_dot_product();
+
+	// data handling/cleaning
+	test_split_matrix();
 
 	// concludes test
 	test.conclude();
