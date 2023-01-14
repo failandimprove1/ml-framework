@@ -68,7 +68,9 @@ bin/main
 Usage
 -----
 Example of usages here:
-* [basic usage](usage.md)
+* [basic usage](usage.md#Basic_Usage)
+* [basic math](usage.md#Basic_Math)
+* [basic data prep](usage.md#Basic_Data_Cleaning)
 
 Authors 
 -------
