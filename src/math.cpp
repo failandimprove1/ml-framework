@@ -178,13 +178,71 @@ float tanh(float x)
     return exp(x) - exp(-x)/exp(x) + exp(-x);
 }
 
+float ReLU(float x)
+{
+    if (x < 0)
+    {
+        return 0;
+    }
+    
+    return x;
+}
+
+float mse(vector_t y, vector_t yhat)
+{
+    vector_t delta = subtract_vectors(y, yhat);
+    vector_t squared_vector = elementwise_multiplication(delta, delta);
+    return (sum(squared_vector) / y.size());
+}
+
+float rmse(vector_t y, vector_t yhat)
+{
+    return sqrt(mse(y, yhat));
+}
+
+vector_t subtract_vectors(vector_t vector1, vector_t vector2)
+{
+    assert (vector1.size() == vector2.size());
+    vector_t new_vector;
+    for (int i = 0; i < vector1.size(); i++)
+        new_vector.push_back(vector1[i] - vector2[i]);
+    return new_vector;
+}
+
+vector_t add_vectors(vector_t vector1, vector_t vector2)
+{
+    assert (vector1.size() == vector2.size());
+    vector_t new_vector;
+    for (int i = 0; i < vector1.size(); i++)
+        new_vector.push_back(vector1[i] + vector2[i]);
+    return new_vector;
+}
+
+float sum(vector_t vector1)
+{
+    vector_t new_vector;
+    float sum;
+    for (int i = 0; i < vector1.size(); i++) 
+        sum += vector1[i];
+    return sum;
+}
+
+vector_t getpredictions(matrix_t x_data, vector_t weights)
+{
+	vector_t predictions;
+	for (int i = 0; i < x_data.size(); i++)
+		{
+			vector_t x_train = x_data[i];
+			predictions.push_back( dot_product(x_train, weights));
+		}
+}
+
 float max_value(vector_t input)
 {
     float max = -INFINITY;
     for (int i = 0; i < input.size(); i++)
-    {
         max = std::max(max, input[i]);
-    }
+
     return max;
 }
 
