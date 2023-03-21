@@ -18,5 +18,6 @@ class Test {
 		string produce_error_message(int expected, int got);
 		string produce_error_message(float expected, float got);
 		string produce_error_message(matrix_t expected, matrix_t got);
+		string produce_error_message(vector_t expected, vector_t got);
 
 };

@@ -59,3 +59,11 @@ string Test::produce_error_message(matrix_t expected, matrix_t got)
 	string got_string = pretty_format_matrix_to_string(got);
 	return "expected: \n" + expected_string + "got: \n" + got_string;
 }
+
+string Test::produce_error_message(vector_t expected, vector_t got)
+{
+	matrix_t expected_matrix = {expected};
+	matrix_t got_matrix = {got};
+
+	return produce_error_message(expected_matrix, got_matrix);
+}
