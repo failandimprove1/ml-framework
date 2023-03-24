@@ -317,6 +317,63 @@ void test_split_matrix()
 	test.is_equal(test_matrix == expected_test_matrix, "split matrix | " + test.produce_error_message(expected_test_matrix, test_matrix));
 }
 
+void test_sum()
+{
+	vector_t test_vector = {23,23,4,22,42,4,24};
+	float expected_sum_vector = 142;
+	
+	matrix_t test_matrix =  {
+		{10.5f, 4, 30.1f},
+		{2, 3.3f, 100},
+		{1.5f, 10.1f, 6},
+		{23,23,24},
+		{2,42,4}
+	};
+
+	float test_sum_matrix = sum(test_matrix);
+	float expected_sum_matrix = 285.5f;
+
+	float test_sum_vector = sum(test_vector);
+
+
+	test.is_equal(test_sum_vector == expected_sum_vector, "vector sum | " + test.produce_error_message(expected_sum_vector, test_sum_vector));
+	test.is_equal(test_sum_matrix == expected_sum_matrix, "matrix sum | " + test.produce_error_message(expected_sum_matrix, test_sum_matrix));
+}
+
+void test_add_vectors()
+{
+	vector_t test_vector1 = {5, 9, 154, 1, 9, 7, 3, 2, 1};
+	vector_t test_vector2 = {10, 12, 600, 21, 1, 5, 6, 3, 329};
+	vector_t expected_vector = {15, 21, 754, 22, 10, 12, 9, 5, 330};
+	vector_t added_vector = add_vectors(test_vector1, test_vector2);
+
+	test.is_equal(added_vector == expected_vector, "vector addition | " + test.produce_error_message(expected_vector, added_vector));
+}
+
+void test_subtract_vectors()
+{
+	vector_t test_vector1 = {10, 12, 600, 21, 9, 7, 6, 3, 329};
+	vector_t test_vector2 = {5, 9, 154, 1, 1, 5, 3, 2, 1.3f};
+	vector_t expected_vector1 = {5, 3, 446, 20, 8, 2, 3, 1, 327.7f};
+	vector_t subtracted_vector1 = subtract_vectors(test_vector1, test_vector2);
+
+	test.is_equal(subtracted_vector1 == expected_vector1, "vector subtraction | " + test.produce_error_message(expected_vector1, subtracted_vector1));
+
+	vector_t test_vector3 = {10, 12, 600, 21, 9, 7, 6, 3.3f, 329.3f};
+	vector_t test_vector4 = {25, 9, 601, 1, 1, 5, 3, 5.2f, 1.3f};
+	vector_t expected_vector2 = {-15, 3, -1, 20, 8, 2, 3, -2.1f, 327.7f};
+	vector_t subtracted_vector2 = subtract_vectors(test_vector3, test_vector4);
+
+	test.is_equal(subtracted_vector1 == expected_vector1, "vector subtraction | " + test.produce_error_message(expected_vector1, subtracted_vector1));
+}
+
+/*void test_mse()
+{
+	vector_t test_vector1 = {10, 12, 600, 21, 9, 7, 6, 3, 329};
+	vector_t test_vector2 = {5, 9, 154, 1, 1, 5, 3, 2, 1.3f};
+	mse(test_vector1, test_vector2)
+}*/
+
 int main()
 {
 	test_create_file();
@@ -324,14 +381,20 @@ int main()
 	// vector math
 	test_vector_elementwise_multiplication();
 	test_vector_dot_product();
+	test_add_vectors();
+	test_subtract_vectors();
+
 
 	// statistics math
 	test_median();
 	test_mean();
 	test_mode();
 
-	//advanced statistics math
+	// advanced statistics math
 	test_softmax();
+
+	// math
+	test_sum();
 
 	// matrix math
 	test_transpose_matrix();
